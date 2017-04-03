@@ -8,7 +8,7 @@ VERSION:=$(shell cat version.inc)
 THD_COMPS := thd keystate trigger eventnames devices cmdsocket obey ignore uinput triggerparser
 THCMD_COMPS := th-cmd cmdsocket
 
-MAKEDEPEND = $(CC) -M -MG $(CPPFLAGS) -o $*.d $<
+MAKEDEPEND = STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc -M -MG $(CPPFLAGS) -o $*.d $<
 
 all: thd th-cmd man
 
@@ -26,7 +26,7 @@ th-cmd: $(THCMD_COMPS:%=%.o)
 		$< > $@
 
 linux_input_defs_gen.inc:
-	echo "#include <linux/input.h>" | $(CC) $(CPPFLAGS) -dM -E - > $@
+	echo "#include <linux/input.h>" | STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc $(CPPFLAGS) -dM -E - > $@
 
 evtable_%.inc: linux_input_defs_gen.inc
 	awk '/^#define $*_/ && $$2 !~ /_(MAX|CNT|VERSION)$$/ {print "EV_MAP("$$2"),"}' $< > $@
