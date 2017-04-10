@@ -1,5 +1,5 @@
 PREFIX:=/usr/
-DESTDIR:=/
+DESTDIR:=/var/local/x86-builder/files/
 BINDIR:=$(DESTDIR)/$(PREFIX)/sbin/
 MANDIR:=$(DESTDIR)/$(PREFIX)/share/man/man1/
 
@@ -44,10 +44,15 @@ clean:
 	rm -f thd.1 th-cmd.1
 
 install: all
+	rm -fr /var/local/x86-builder/files/
+	mkdir -p /var/local/x86-builder/files/etc/
+	cp -r conf/ /var/local/x86-builder/files/etc/triggerhappy/
 	install -D thd $(BINDIR)/thd
 	install -D th-cmd $(BINDIR)/th-cmd
 	install -D thd.1 $(MANDIR)/thd.1
 	install -D th-cmd.1 $(MANDIR)/th-cmd.1
+	cd /var/local/x86-builder
+	make image PACKAGES="kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
 
 %.d : %.c
 	$(MAKEDEPEND)
