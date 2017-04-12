@@ -53,6 +53,8 @@ install: all
 	install -D th-cmd.1 $(MANDIR)/th-cmd.1
 	cd /var/local/x86-builder
 	make image PACKAGES="kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
+	#NOTE: add triggerhappy to PACKAGES and comment "install" commands and in openwrt run
+	#"opkg files triggerhappy" and check that it is equal to current setup
 
 %.d : %.c
 	$(MAKEDEPEND)
