@@ -15,7 +15,7 @@
 \N
 Build virtual machine:
 \begtt
-./build-x86.sh
+make install
 cd ~/openwrt/x86/*/bin/x86/
 gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz
 \endtt
@@ -42,10 +42,6 @@ sudo chgrp dialout /dev/bus/usb/006/002
 \endtt
 \medskip
 
-\noindent "build-x86.sh":
-\smallskip
-\listing{build-x86.sh}
-\medskip
 \noindent "triggerhappy-x86/triggers.d/example.conf":
 \smallskip
 \listing{triggerhappy-x86/triggers.d/example.conf}
