@@ -4,3 +4,4 @@ Package triggerhappy (0.3.4-2) is installed on root and has the following files:
 /usr/sbin/thd
 /etc/init.d/triggerhappy
 /etc/hotplug.d/input/10-triggerhappy
+check that what is in this file is in built openwrt image

@@ -44,8 +44,6 @@ clean:
 	rm -f thd.1 th-cmd.1
 
 install: all
-	#NOTE: add triggerhappy to PACKAGES and comment "install" commands and in openwrt run
-	#"opkg files triggerhappy" and check that it is equal to current setup
 	rm -f /var/local/x86-builder
 	rm -fr /var/local/x86/OpenWrt-ImageBuilder-*
 	tar -C /var/local/x86 -jxf /usr/local/SUPER_DEBIAN/x86-builder.tar.bz2
