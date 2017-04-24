@@ -1,0 +1,6 @@
+Package triggerhappy (0.3.4-2) is installed on root and has the following files:
+/etc/triggerhappy/triggers.d/example.conf
+/usr/sbin/th-cmd
+/usr/sbin/thd
+/etc/init.d/triggerhappy
+/etc/hotplug.d/input/10-triggerhappy
