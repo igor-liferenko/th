@@ -1,7 +1,7 @@
 PREFIX:=/usr/
-DESTDIR:=/var/local/x86-builder/files/
-BINDIR:=$(DESTDIR)/$(PREFIX)/sbin/
-MANDIR:=$(DESTDIR)/$(PREFIX)/share/man/man1/
+DESTDIR:=/var/local/x86-builder/files
+BINDIR:=$(DESTDIR)/$(PREFIX)/sbin
+MANDIR:=$(DESTDIR)/$(PREFIX)/share/man/man1
 
 VERSION:=$(shell cat version.inc)
 
