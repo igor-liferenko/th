@@ -44,17 +44,16 @@ clean:
 	rm -f thd.1 th-cmd.1
 
 install: all
-	rm -fr /var/local/x86-builder/files/
-	mkdir -p /var/local/x86-builder/files/etc/
-	cp -r conf/ /var/local/x86-builder/files/etc/triggerhappy/
-	install -D thd $(BINDIR)/thd
-	install -D th-cmd $(BINDIR)/th-cmd
-	install -D thd.1 $(MANDIR)/thd.1
-	install -D th-cmd.1 $(MANDIR)/th-cmd.1
 	#NOTE: add triggerhappy to PACKAGES and comment "install" commands and in openwrt run
 	#"opkg files triggerhappy" and check that it is equal to current setup
 	rm -fr /var/local/x86/OpenWrt-ImageBuilder-*
 	tar -C /var/local/x86 -jxf /usr/local/SUPER_DEBIAN/x86-builder.tar.bz2
+	mkdir -p /var/local/x86/OpenWrt-ImageBuilder-*/files/etc/
+	cp -r conf/ /var/local/x86/OpenWrt-ImageBuilder-*/files/etc/triggerhappy/
+	install -D thd $(BINDIR)/thd
+	install -D th-cmd $(BINDIR)/th-cmd
+	install -D thd.1 $(MANDIR)/thd.1
+	install -D th-cmd.1 $(MANDIR)/th-cmd.1
 	make -C /var/local/x86/OpenWrt-ImageBuilder-* image PACKAGES="kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
 
 %.d : %.c
