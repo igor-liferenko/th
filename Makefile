@@ -55,6 +55,7 @@ install: all
 	install -D thd.1 $(MANDIR)/thd.1
 	install -D th-cmd.1 $(MANDIR)/th-cmd.1
 	make -C /var/local/x86-builder image PACKAGES="kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
+	cat TODO
 
 %.d : %.c
 	$(MAKEDEPEND)
