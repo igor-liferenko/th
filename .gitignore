@@ -10,3 +10,5 @@ version.h
 *.log
 *.dvi
 *.ps
+prog
+prog.c

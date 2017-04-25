@@ -1,7 +1,3 @@
-Package triggerhappy (0.3.4-2) is installed on root and has the following files:
-/etc/triggerhappy/triggers.d/example.conf
-/usr/sbin/th-cmd
-/usr/sbin/thd
-/etc/init.d/triggerhappy
-/etc/hotplug.d/input/10-triggerhappy
-check that what is in this file is in built openwrt image
+Put to openwrt image the following files (if necessary):
+/etc/init.d/triggerhappy (see file init_d-triggerhappy)
+/etc/hotplug.d/input/10-triggerhappy (see file hotplug-triggerhappy)
