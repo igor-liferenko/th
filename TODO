@@ -1,3 +1,0 @@
-Put to openwrt image the following files (if necessary):
-/etc/init.d/triggerhappy (see file init_d-triggerhappy)
-/etc/hotplug.d/input/10-triggerhappy (see file hotplug-triggerhappy)
