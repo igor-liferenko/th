@@ -48,8 +48,14 @@ clean:
 	rm -f thd th-cmd
 	rm -f thd.1 th-cmd.1
 
-install: all
-	rm -f /var/local/x86-builder
+boot:
+	@! ps -ef|grep -q [f]ile=openwrt-15.05.1-x86-64-combined-ext4.img || ( echo ALREADY RUNNING; false )
+	@test -e /var/local/x86-builder || ( echo run \"make image\"; false )
+	@cd /var/local/x86-builder/bin/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=openwrt-15.05.1-x86-64-combined-ext4.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
+
+image:
+	@! ps -ef|grep -q [f]ile=openwrt-15.05.1-x86-64-combined-ext4.img || ( echo ALREADY RUNNING; false )
+	@! test -e /var/local/x86-builder || ( echo IMAGE EXISTS; false )
 	rm -fr /var/local/x86/OpenWrt-ImageBuilder-*
 	tar -C /var/local/x86 -jxf /usr/local/SUPER_DEBIAN/x86-builder.tar.bz2
 	ln -s `ls -d /var/local/x86/OpenWrt-ImageBuilder-*` /var/local/x86-builder
@@ -67,7 +73,8 @@ install: all
 	echo done >> $(DESTDIR)/etc/rc.local
 	echo exit 0 >> $(DESTDIR)/etc/rc.local
 	make -C /var/local/x86-builder image PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
-	cd /var/local/x86-builder/bin/x86/ && gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz && qemu-system-x86_64 -enable-kvm -drive format=raw,file=openwrt-15.05.1-x86-64-combined-ext4.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
+	cd /var/local/x86-builder/bin/x86/ && gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz
+	@echo now run \"make boot\"
 
 %.d : %.c
 	$(MAKEDEPEND)

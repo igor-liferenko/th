@@ -1,2 +1,0 @@
-Do so that "make boot" will boot openwrt image, and also build it
-if it does not exist.
