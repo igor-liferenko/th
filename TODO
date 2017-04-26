@@ -1,8 +1,2 @@
 Do so that "make boot" will boot openwrt image, and also build it
 if it does not exist.
-
-Make image with NFS and make the following links to files on NFS share:
-
-	/etc/triggerhappy/triggers.d/example.conf
-	/usr/sbin/th-cmd
-	/usr/sbin/thd
