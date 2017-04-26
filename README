@@ -15,7 +15,14 @@ The program th-cmd is used to add new devices to the daemon:
 
 For more information, consult the manual pages of "thd" and "th-cmd".
 
-Use th-cmd commands from the following files, if necessary:
+Start:
 
-	init_d-triggerhappy
-	hotplug-triggerhappy
+	/usr/sbin/thd --socket /tmp/triggerhappy.socket --triggers /etc/triggerhappy/triggers.d/ --daemon /dev/input/event*
+
+Stop:
+
+	/usr/sbin/th-cmd --socket /tmp/triggerhappy.socket --quit
+
+Add device:
+
+	/usr/sbin/th-cmd --socket /tmp/triggerhappy.socket --add /dev/XYZ
