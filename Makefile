@@ -1,9 +1,8 @@
 CC:=STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc
 
-PREFIX:=usr
 DESTDIR:=/var/local/x86-builder/files
-BINDIR:=$(DESTDIR)/$(PREFIX)/sbin
-MANDIR:=$(DESTDIR)/$(PREFIX)/share/man/man1
+BINDIR:=$(DESTDIR)/usr/sbin
+MANDIR:=$(DESTDIR)/usr/share/man/man1
 
 VERSION:=$(shell cat version.inc)
 
@@ -59,6 +58,9 @@ install: all
 	install -D prog $(BINDIR)/prog
 	install -D thd $(BINDIR)/thd
 	install -D th-cmd $(BINDIR)/th-cmd
+	mkdir -p $(DESTDIR)/etc/uci-defaults/
+	echo uci set network.lan.proto=dhcp > $(DESTDIR)/etc/uci-defaults/network.local
+	echo uci commit network >> $(DESTDIR)/etc/uci-defaults/network.local
 	make -C /var/local/x86-builder image PACKAGES="kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
 	cd /var/local/x86-builder/bin/x86/ && gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz && qemu-system-x86_64 -enable-kvm -drive format=raw,file=openwrt-15.05.1-x86-64-combined-ext4.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
 
