@@ -1,3 +1,5 @@
+CC:=STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc
+
 PREFIX:=usr
 DESTDIR:=/var/local/x86-builder/files
 BINDIR:=$(DESTDIR)/$(PREFIX)/sbin
