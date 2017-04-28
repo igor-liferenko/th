@@ -53,29 +53,6 @@ boot:
 	@test -e /var/local/x86-builder || ( echo run \"make image\"; false )
 	@cd /var/local/x86-builder/bin/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=openwrt-15.05.1-x86-64-combined-ext4.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
 
-image:
-	@! ps -ef|grep -q [f]ile=openwrt-15.05.1-x86-64-combined-ext4.img || ( echo ALREADY RUNNING; false )
-	@! test -e /var/local/x86-builder || ( echo IMAGE EXISTS; false )
-	rm -fr /var/local/x86/OpenWrt-ImageBuilder-*
-	tar -C /var/local/x86 -jxf /usr/local/SUPER_DEBIAN/x86-builder.tar.bz2
-	ln -s `ls -d /var/local/x86/OpenWrt-ImageBuilder-*` /var/local/x86-builder
-	mkdir -p $(BINDIR)
-	install -D prog $(BINDIR)/prog
-	mkdir -p $(DESTDIR)/etc/
-	ln -s /mnt/conf/ $(DESTDIR)/etc/triggerhappy
-	ln -s /mnt/thd $(BINDIR)/thd
-	ln -s /mnt/th-cmd $(BINDIR)/th-cmd
-	mkdir -p $(DESTDIR)/etc/uci-defaults/
-	echo uci set network.lan.proto=dhcp > $(DESTDIR)/etc/uci-defaults/network.local
-	echo uci commit network >> $(DESTDIR)/etc/uci-defaults/network.local
-	echo 'while ! mount|grep -q ^10.0.2.2; do' > $(DESTDIR)/etc/rc.local
-	echo '  mount.nfs 10.0.2.2:/usr/local/th/ /mnt/ -o nolock,vers=3' >> $(DESTDIR)/etc/rc.local
-	echo done >> $(DESTDIR)/etc/rc.local
-	echo exit 0 >> $(DESTDIR)/etc/rc.local
-	make -C /var/local/x86-builder image PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
-	cd /var/local/x86-builder/bin/x86/ && gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz
-	@echo now run \"make boot\"
-
 %.d : %.c
 	$(MAKEDEPEND)
 
