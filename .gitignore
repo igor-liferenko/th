@@ -12,3 +12,4 @@ version.h
 *.ps
 prog
 prog.c
+lock-image

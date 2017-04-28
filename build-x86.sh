@@ -65,6 +65,6 @@ ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
 rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
 cp bin/x86/OpenWrt-SDK-*.tar.bz2 /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
 # copy img:
-cp bin/x86/openwrt-x86-64-combined-ext4.img /var/local/x86/
+cp bin/x86/openwrt-x86-64-combined-ext4.img /var/local/x86/x86.img
 rm -f /usr/local/SUPER_DEBIAN/x86.img
 cp bin/x86/openwrt-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img

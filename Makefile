@@ -49,9 +49,10 @@ clean:
 	rm -f thd.1 th-cmd.1
 
 boot:
-	@! ps -ef|grep -q [f]ile=openwrt-15.05.1-x86-64-combined-ext4.img || ( echo ALREADY RUNNING; false )
-	@test -e /var/local/x86-builder || ( echo run \"make image\"; false )
-	@cd /var/local/x86-builder/bin/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=openwrt-15.05.1-x86-64-combined-ext4.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
+	@! test -e lock-image || ( echo ALREADY RUNNING; false )
+	@touch lock-image
+	@cd /var/local/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
+	@rm lock-image
 
 %.d : %.c
 	$(MAKEDEPEND)
