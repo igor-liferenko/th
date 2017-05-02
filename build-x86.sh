@@ -52,6 +52,7 @@ CONFIG_PACKAGE_nfs-utils=y
 CONFIG_PACKAGE_kmod-usb-hid=y
 CONFIG_PACKAGE_kmod-hid-generic=y
 CONFIG_PACKAGE_kmod-usb-ohci=y
+CONFIG_ALL_KMODS=y
 EOF
 make defconfig
 make
