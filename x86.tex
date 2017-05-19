@@ -33,7 +33,7 @@ libusb: error [_get_usbfs_fd] libusb couldn't open USB device /dev/bus/usb/006/0
 libusb: error [_get_usbfs_fd] libusb requires write access to USB device nodes.
 \endtt
 \smallskip
-Then poweroff qemu and do this:
+Then {\tt poweroff} qemu and do this:
 \begtt
 sudo chgrp dialout /dev/bus/usb/006/002
 \endtt
@@ -178,6 +178,7 @@ Press:
 11989 root      9292 S    /bin/sh -c /etc/triggerhappy/sleep1
 \endtt
 
+\vfill\eject
 \indent\hbox to0pt{\hskip-\parindent$\bullet$\hfil}%
 Hold:
 \begtt
