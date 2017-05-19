@@ -54,7 +54,7 @@ boot:
 	@cd /var/local/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
 	@rm lock-image
 
-install:
+image:
 	./build-x86.sh
 
 %.d : %.c
