@@ -16,8 +16,6 @@
 Build virtual machine:
 \begtt
 make install
-cd /var/local/x86-builder/bin/x86/
-gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz
 \endtt
 \medskip
 
@@ -25,8 +23,7 @@ gunzip openwrt-15.05.1-x86-64-combined-ext4.img.gz
 Plug in usb keyboard or numpad (in addition to your main keyboard), see dmesg for {\sl vendorid\/} and {\sl productid\/}
 values, and start qemu:
 \begtt
-qemu-system-x86_64 -enable-kvm -drive format=raw,file=openwrt-15.05.1-x86-64-combined-ext4.img -nographic -usb \
-  -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
+make boot
 \endtt
 \medskip
 
@@ -39,6 +36,13 @@ libusb: error [_get_usbfs_fd] libusb requires write access to USB device nodes.
 Then poweroff qemu and do this:
 \begtt
 sudo chgrp dialout /dev/bus/usb/006/002
+\endtt
+\medskip
+
+\N
+Build triggerhappy (see README how to run it):
+\begtt
+make
 \endtt
 \medskip
 
@@ -96,10 +100,10 @@ was the same as before.
 Then I decided to use mutexes and delay for volume buttons.
 The mutex garanteed that no other instance of "volume_plus" is running.
 And delay guaranteed that the operation will have time to finish before
-another one is started. So, the "grep" call above was changed to
+another one is started. So, the "grep" call above was changed into \par
 "mkdir /var/lock/volume 2>/dev/null || exit <mpc> <delay>
-rmdir /var/lock/volume". But this did not work either - holding the
-volume button rebooted the routed. Do not know why, but probably because
+rmdir /var/lock/volume" \par\noindent But this did not work either - holding the
+volume button rebooted the router. Do not know why, but probably because
 a lot of instances of script was started by {\sl triggerhappy\/}, which
 caused memory exhaustion on dir320.
 
