@@ -61,7 +61,7 @@ rm -fr /var/local/x86/
 mkdir /var/local/x86/
 # copy sdk:
 tar -C /var/local/x86 -jxf bin/x86/OpenWrt-SDK-*.tar.bz2
-rm /var/local/x86-sdk
+rm -f /var/local/x86-sdk
 ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
 rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
 cp bin/x86/OpenWrt-SDK-*.tar.bz2 /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
