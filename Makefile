@@ -48,10 +48,13 @@ clean:
 	rm -f thd th-cmd
 	rm -f thd.1 th-cmd.1
 
-boot:
+VENDORID=$(shell if [ "`whereami 2>/dev/null`" = home ]; then echo 13ba; else echo 04d9; fi)
+PRODUCTID=$(shell if [ "`whereami 2>/dev/null`" = home ]; then echo 0001; else echo 1702; fi)
+
+boot: all
 	@! test -e lock-image || ( echo ALREADY RUNNING; false )
 	@touch lock-image
-	@cd /var/local/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x04d9,productid=0x1702
+	@cd /var/local/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID}
 	@rm lock-image
 
 %.d : %.c
