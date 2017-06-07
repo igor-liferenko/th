@@ -24,25 +24,18 @@ pre-compiled image is automatically installed with the OS):
 \medskip
 
 \N
-Plug in usb keyboard or numpad (in addition to your main keyboard), see dmesg for {\sl vendorid\/} and {\sl productid\/}
-values, and start qemu:
+For next step to work, add this to "/etc/udev/rules.d/99-local-udev.rules" (done automatically in installer):
 \begtt
-make boot
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="<vendorid>", ATTRS{idProduct}=="<productid>", GROUP:="dialout"
 \endtt
 \medskip
 
-If usb will not work, search such lines in qemu output:
+\N
+Plug in usb keyboard or numpad (in addition to your main keyboard), see dmesg for {\sl vendorid\/} and {\sl productid\/}
+values, set these values in Makefile and start qemu:
 \begtt
-libusb: error [_get_usbfs_fd] libusb couldn't open USB device /dev/bus/usb/006/002: Permission denied
-libusb: error [_get_usbfs_fd] libusb requires write access to USB device nodes.
+make boot
 \endtt
-\smallskip
-Then {\tt poweroff} qemu and do this:
-\begtt
-sudo chgrp dialout /dev/bus/usb/006/002
-\endtt
-or add the following udev rules:
-xxx
 \medskip
 
 \N
