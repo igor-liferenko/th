@@ -14,7 +14,7 @@ MAKEDEPEND = STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwr
 all: thd th-cmd man prog
 
 prog:
-	ct prog.w
+	ctangle prog.w
 	STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc prog.c -o prog
 
 man: thd.1 th-cmd.1
