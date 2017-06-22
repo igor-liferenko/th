@@ -9,13 +9,13 @@ VERSION:=$(shell cat version.inc)
 THD_COMPS := thd keystate trigger eventnames devices cmdsocket obey ignore uinput triggerparser
 THCMD_COMPS := th-cmd cmdsocket
 
-MAKEDEPEND = STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc -M -MG $(CFLAGS) -o $*.d $<
+MAKEDEPEND = $(CC) -M -MG $(CFLAGS) -o $*.d $<
 
 all: thd th-cmd man prog
 
 prog:
 	ctangle prog.w
-	STAGING_DIR=/var/local/x86-sdk /var/local/x86-sdk/bin/x86_64-openwrt-linux-gcc prog.c -o prog
+	$(CC) prog.c -o prog
 
 man: thd.1 th-cmd.1
 
