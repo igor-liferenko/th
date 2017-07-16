@@ -1,5 +1,7 @@
 ifeq ($(MAKECMDGOALS),)
 CC=th-gcc
+else
+CC=clang -Weverything
 endif
 
 DESTDIR:=/var/local/x86-builder/files
