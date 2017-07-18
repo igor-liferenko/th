@@ -1,8 +1,4 @@
-ifeq ($(MAKECMDGOALS),)
-CC=th-gcc
-else
-CC=clang
-endif
+# TODO: switch to clang
 
 DESTDIR:=/var/local/x86-builder/files
 BINDIR:=$(DESTDIR)/usr/sbin
@@ -16,10 +12,6 @@ THCMD_COMPS := th-cmd cmdsocket
 MAKEDEPEND = th-gcc -M -MG $(CFLAGS) -o $*.d $<
 
 all: thd th-cmd man prog
-
-prog:
-	ctangle prog.w
-	th-gcc prog.c -o prog
 
 man: thd.1 th-cmd.1
 
