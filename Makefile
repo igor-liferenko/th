@@ -1,5 +1,3 @@
-# TODO: switch to clang
-
 DESTDIR:=/var/local/x86-builder/files
 BINDIR:=$(DESTDIR)/usr/sbin
 MANDIR:=$(DESTDIR)/usr/share/man/man1
