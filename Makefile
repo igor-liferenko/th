@@ -7,6 +7,8 @@ MANDIR:=$(DESTDIR)/usr/share/man/man1
 
 VERSION:=$(shell cat version.inc)
 
+CC=th-gcc
+
 THD_COMPS := thd keystate trigger eventnames devices cmdsocket obey ignore uinput triggerparser
 THCMD_COMPS := th-cmd cmdsocket
 
