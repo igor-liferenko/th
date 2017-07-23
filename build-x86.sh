@@ -19,7 +19,7 @@ ln -s /mnt/th-cmd files/usr/sbin/th-cmd
 mkdir -p files/etc/
 cat << EOF > files/etc/rc.local
 while ! mount|grep -q ^10.0.2.2; do
-  mount.nfs 10.0.2.2:/usr/local/th/ /mnt/ -o nolock,vers=3
+  mount.nfs 10.0.2.2:/home/user/th/ /mnt/ -o nolock,vers=3
 done
 exit 0
 EOF
