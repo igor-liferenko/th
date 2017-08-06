@@ -47,8 +47,16 @@ clean:
 	rm -f thd th-cmd
 	rm -f thd.1 th-cmd.1
 
-VENDORID=$(shell if [ "`whereami 2>/dev/null`" = home ]; then echo 13ba; else echo 04d9; fi)
-PRODUCTID=$(shell if [ "`whereami 2>/dev/null`" = home ]; then echo 0001; else echo 1702; fi)
+ifeq ($(shell whereami),home)
+VENDORID=13ba
+PRODUCTID=0001
+else ifeq ($(shell whereami),notebook)
+VENDORID=1c4f
+PRODUCTID=0002
+else
+VENDORID=04d9
+PRODUCTID=1702
+endif
 
 boot: all
 	@! test -e lock-image || ( echo ALREADY RUNNING; false )
