@@ -129,7 +129,7 @@ The testing results in `case 2' below are for this configuration.
 \noindent{\bf What we need to achieve:}
 {\sl triggerhappy\/} must not wait until the script started by it finishes.
 In terms of testing results below (output from
-"while true; do ps -w|grep [s]leep; done"), script from `case 2' must behave
+"while true; do ps -ww|grep [s]leep; done"), script from `case 2' must behave
 the same as script from `case 0', except
 that in ``Hold'' phase must be this
 (this is what happens when "/etc/triggerhappy/sleep2 &" is run separately):
