@@ -1,4 +1,6 @@
-@ @c
+@ https://www.kernel.org/doc/Documentation/input/input.txt
+
+@c
 @<Header files@>@;
 @<Functions@>@;
 int main(void)
