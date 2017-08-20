@@ -68,3 +68,6 @@ boot: all
 	$(MAKEDEPEND)
 
 -include $(THD_COMPS:%=%.d) $(THCMD_COMPS:%=%.d)
+
+prog: prog.c
+	th-gcc -o $@ $<
