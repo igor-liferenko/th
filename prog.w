@@ -1,5 +1,7 @@
 @ https://www.kernel.org/doc/Documentation/input/input.txt
 
+TODO: use "select" to use all devices in /dev/input/ simultaneously (see ~/prt/select.w for an example)
+
 @c
 @<Header files@>@;
 @<Functions@>@;
