@@ -24,7 +24,7 @@ done
 exit 0
 EOF
 mkdir -p files/etc/uci-defaults/
-cat << EOF > files/etc/uci-defaults/network.local
+cat << EOF > files/etc/uci-defaults/my
 uci set network.lan.proto=dhcp
 uci commit network
 EOF
