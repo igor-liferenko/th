@@ -4,9 +4,6 @@ th-cmd
 th-cmd.1
 *.o
 /*.d
-evtable_*.inc
-linux_input_defs_gen.inc
-version.h
 *.log
 *.dvi
 *.ps
