@@ -12,9 +12,7 @@ THCMD_COMPS := th-cmd cmdsocket
 
 MAKEDEPEND = th-gcc -M -MG $(CFLAGS) -o $*.d $<
 
-all: thd th-cmd man
-
-man: thd.1 th-cmd.1
+all: thd th-cmd
 
 thd: $(THD_COMPS:%=%.o)
 
