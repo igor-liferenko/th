@@ -5,7 +5,7 @@ DESTDIR:=/var/local/x86-builder/files
 BINDIR:=$(DESTDIR)/usr/sbin
 MANDIR:=$(DESTDIR)/usr/share/man/man1
 
-CC=th-gcc
+CC=th-gcc -Wno-sign-conversion
 
 THD_COMPS := thd keystate trigger eventnames devices cmdsocket obey ignore uinput triggerparser
 THCMD_COMPS := th-cmd cmdsocket

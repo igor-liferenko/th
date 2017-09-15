@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <stdint.h>
 #include "devices.h"
 #include "command.h"
 #include "keystate.h"

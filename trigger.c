@@ -111,19 +111,16 @@ int read_triggers(const char *path) {
 		int n;
 		n = scandir(path, &namelist, accept_triggerfile, alphasort);
 		if ( n < 0) {
-			perror("scandir");
+			fprintf(stderr, "scandir: %m\n");
 			return 1;
 		} else {
 			while (n--) {
 				struct stat sf;
 				char *file = namelist[n]->d_name;
-				char *sep = "/";
-				char fpath[strlen(path)+strlen(sep)+strlen(file) + 1];
-				strcpy(fpath, path);
-				strcat(fpath, sep);
-				strcat(fpath, file);
+				char fpath[strlen(path) + 1 + strlen(file) + 1];
+				sprintf(fpath, "%s/%s", path, file);
 				if (stat(fpath, &sf) == -1) {
-					perror("stat");
+					fprintf(stderr, "stat: %m\n");
 				}
 				if (S_ISREG(sf.st_mode)) {
 					read_triggerfile(fpath);
@@ -182,8 +179,6 @@ static int correct_mode( const char *tmode ) {
 void run_triggers(uint16_t type, uint16_t code, int value, keystate_holder ksh, device *dev) {
 	if (triggers_are_enabled == 0) {
 		return;
-	}
-	if (dev && dev->tag) {
 	}
 	trigger *et = trigger_list;
 	while (et != NULL) {

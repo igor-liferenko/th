@@ -4,4 +4,4 @@
  * For full license terms, see COPYING.
  */
 
-int obey_command( struct command *cmd );
+int obey_command(struct command *cmd);
