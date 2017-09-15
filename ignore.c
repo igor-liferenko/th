@@ -8,12 +8,12 @@
 #include <stdlib.h>
 #include "ignore.h"
 
-void ignore_key( int code, ignore **list ) {
+void ignore_key(uint16_t code, ignore **list) {
 	ignore **p = list;
 	while ( *p != NULL ) {
 		p = &( (*p)->next );
 	}
-	*p = malloc( sizeof(ignore) );
+	*p = malloc(sizeof (ignore));
 	if (*p) {
 		(*p)->next = NULL;
 		(*p)->code = code;
@@ -29,7 +29,7 @@ void print_ignores( ignore *list ) {
 	}
 }
 
-int is_ignored( int code, ignore *list ) {
+int is_ignored(uint16_t code, ignore *list ) {
 	ignore *p = list;
 	while ( p != NULL ) {
 		if (p->code == code) {

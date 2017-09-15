@@ -50,7 +50,7 @@ char *get_keystate(keystate_holder ksh) {
 }
 
 char *get_keystate_ignore_key(keystate_holder ksh, int ignore_key) {
-	const int bsize = 1024;
+	const size_t bsize = 1024;
 	char *KS = "+";
 
 	char buf[bsize];

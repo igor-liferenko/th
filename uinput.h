@@ -4,6 +4,8 @@
  * For full license terms, see COPYING.
  */
 
+#include <stdint.h>
+
 int open_uinput(const char *path);
 void close_uinput();
-int send_event(const int type, const int code, const int value);
+int send_event(const uint16_t type, const uint16_t code, const int value);

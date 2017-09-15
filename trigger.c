@@ -179,7 +179,7 @@ static int correct_mode( const char *tmode ) {
 	return (tmode == NULL) || (strcmp( get_trigger_mode(), tmode ) == 0);
 }
 
-void run_triggers(int type, int code, int value, keystate_holder ksh, device *dev) {
+void run_triggers(uint16_t type, uint16_t code, int value, keystate_holder ksh, device *dev) {
 	if (triggers_are_enabled == 0) {
 		return;
 	}
@@ -205,8 +205,8 @@ void run_triggers(int type, int code, int value, keystate_holder ksh, device *de
 			} else if (et->action[0] == '<' ) {
 				char *keyname = &(et->action[1]);
 				fprintf(stderr, "Sending event: %s\n", keyname);
-				int type = lookup_event_type( keyname );
-				int code = lookup_event_code( keyname );
+				lookup_event_type(keyname, &type);
+				lookup_event_code(keyname, &code);
 				if (type && code) {
 					send_event( type, code, 1 );
 					send_event( type, code, 0 );

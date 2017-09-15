@@ -64,7 +64,7 @@ void close_uinput() {
 	}
 }
 
-int send_event(const int type, const int code, const int value) {
+int send_event(const uint16_t type, const uint16_t code, const int value) {
 	if (!uinput_fd) {
 		return -1;
 	}

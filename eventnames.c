@@ -32,12 +32,13 @@ const char *lookup_type_name( const struct input_event ev ) {
 	return lookup_type_name_i( ev.type );
 }
 
-int lookup_event_code( const char *eventname ) {
-	int i = 0;
+int lookup_event_code(const char *eventname, uint16_t *type) {
+	uint16_t i = 0;
 	while (i < KEY_MAX) {
 		if (KEY_NAME[i] != NULL &&
 		    strcmp(eventname, KEY_NAME[i]) == 0) {
-			return i;
+			*type = i;
+			return 0;
 		}
 		i++;
 	}
@@ -45,19 +46,21 @@ int lookup_event_code( const char *eventname ) {
 	while (i<SW_MAX) {
 		if (SW_NAME[i] != NULL &&
 		    strcmp(eventname, SW_NAME[i]) == 0) {
-			return i;
+			*type = i;
+			return 0;
 		}
 		i++;
 	}
 	return -1;
 }
 
-int lookup_event_type( const char *eventname ) {
+int lookup_event_type(const char *eventname, uint16_t *code) {
 	int i = 0;
 	while (i<KEY_MAX) {
 		if (KEY_NAME[i] != NULL &&
 		    strcmp(eventname, KEY_NAME[i]) == 0) {
-			return EV_KEY;
+			*code = EV_KEY;
+			return 0;
 		}
 		i++;
 	}
@@ -65,7 +68,8 @@ int lookup_event_type( const char *eventname ) {
 	while (i<SW_MAX) {
 		if (SW_NAME[i] != NULL &&
 		    strcmp(eventname, SW_NAME[i]) == 0) {
-			return EV_SW;
+			*code = EV_SW;
+			return 0;
 		}
 		i++;
 	}

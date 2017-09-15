@@ -100,7 +100,7 @@ static int read_event( device *dev ) {
 	int fd = dev->fd;
 	char *devname = dev->devname;
 	struct input_event ev;
-	int n = read( fd, &ev, sizeof(ev) );
+	ssize_t n = read( fd, &ev, sizeof(ev) );
 	if ( n != sizeof(ev) ) {
 		fprintf(stderr, "Error reading device '%s'\n", dev->devname);
 		return 1;
@@ -122,7 +122,7 @@ static int read_event( device *dev ) {
 
 static void check_device( device *d ) {
 	int fd = d->fd;
-	if (FD_ISSET( fd, &rfds )) {
+	if (FD_ISSET(fd, &rfds)) {
 		if (read_event( d )) {
 			/* read error? Remove the device! */
 			remove_device( d->devname );
@@ -304,7 +304,7 @@ int start_readers(int argc, char *argv[], int start) {
 	if (run_as_daemon) {
 		int err = daemon(0,0);
 		if (err) {
-			perror("daemon()");
+			fprintf(stderr, "daemon: %m\n");
 		}
 	}
 	if (pidfile) {
@@ -314,8 +314,8 @@ int start_readers(int argc, char *argv[], int start) {
 	if (user) {
 		struct passwd *pw = getpwnam(user);
 		if (pw) {
-			int uid = pw->pw_uid;
-			int gid = pw->pw_gid;
+			uid_t uid = pw->pw_uid;
+			gid_t gid = pw->pw_gid;
 			if ( initgroups(user, gid) ) {
 				perror("initgroups");
 				return 1;
@@ -348,6 +348,7 @@ int main(int argc, char *argv[]) {
 		if (c == -1) {
 			break;
 		}
+		uint16_t type, code;
 		switch (c) {
 			case 0:
 				if (long_options[option_index].flag != 0) {
@@ -371,8 +372,10 @@ int main(int argc, char *argv[]) {
 				cmd_file = optarg;
 				break;
 			case 'i':
-				if ( lookup_event_type(optarg) == EV_KEY ) {
-					ignore_key( lookup_event_code(optarg), &ignored_keys );
+				lookup_event_type(optarg, &type);
+				if (type == EV_KEY) {
+					lookup_event_code(optarg, &code);
+					ignore_key(code, &ignored_keys);
 				}
 				break;
 			case 'h':

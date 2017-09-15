@@ -4,11 +4,13 @@
  * For full license terms, see COPYING.
  */
 
+#include <stdint.h>
+
 typedef struct ignore {
 	int code;
 	struct ignore *next;
 } ignore;
 
-void ignore_key( int code, ignore **list );
-int is_ignored( int code, ignore *list );
-void clear_ignore_list( ignore **list );
+void ignore_key(uint16_t code, ignore **list);
+int is_ignored(uint16_t code, ignore *list);
+void clear_ignore_list(ignore **list);
