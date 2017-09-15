@@ -36,7 +36,7 @@ static __inline__ int test_bit(int nr, BITFIELD * addr) {
 	BITFIELD mask;
 
 	addr += nr >> 5;
-	mask = 1 << (nr & 0x1f);
+	mask = (BITFIELD) (1 << (nr & 0x1f));
 	return ((mask & *addr) != 0);
 }
 

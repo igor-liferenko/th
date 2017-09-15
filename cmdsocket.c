@@ -33,7 +33,7 @@ int bind_cmdsocket( char *name ) {
 	strcpy(addr.sun_path, name);
 	addr.sun_family = AF_UNIX;
 	bind (cmd_fd, (struct sockaddr *) &addr, 
-		strlen(addr.sun_path) + sizeof (addr.sun_family));
+		(socklen_t) (strlen(addr.sun_path) + sizeof addr.sun_family));
 	return cmd_fd;
 }
 
@@ -44,7 +44,7 @@ int connect_cmdsocket( char *name ) {
 	strcpy(server.sun_path, name);
 	server.sun_family = AF_UNIX;
 	connect(fd, (struct sockaddr *) &server,
-		strlen(server.sun_path) + sizeof (server.sun_family));
+          (socklen_t) (strlen(server.sun_path) + sizeof server.sun_family));
 	return fd;
 }
 
@@ -69,7 +69,7 @@ struct command *read_command( int cmd_fd ) {
 		.msg_controllen = sizeof(buffer)
 	};
 
-	int done = recvmsg( cmd_fd, &msg, 0 );
+	ssize_t done = recvmsg( cmd_fd, &msg, 0 );
 
 	if (done == -1) {
 		fprintf(stderr, "Error reading command.");
@@ -135,6 +135,7 @@ int send_command( int cmd_fd, enum command_type type, char *param, int passfd, i
 		m.msg_controllen = cmessage->cmsg_len;
 		memcpy(CMSG_DATA(cmessage), dev_fd, sizeof dev_fd);
 	}
-	int done = sendmsg( cmd_fd, &m, 0 );
+
+	ssize_t done = sendmsg( cmd_fd, &m, 0 );
 	return (done == -1);
 }
