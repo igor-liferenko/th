@@ -1,30 +1,22 @@
-# TODO: try to run it directly on computer - without openwrt and virtual machine
-# TODO: use clang if we run "make th" (like in prt/ repo) - because clang hase #line patch
-
-DESTDIR:=/var/local/x86-builder/files
-BINDIR:=$(DESTDIR)/usr/sbin
-MANDIR:=$(DESTDIR)/usr/share/man/man1
+# TODO: to run it directly on computer, make so that "make th" (like in prt/ repo) will
+#       use clang instead of th-gcc in two places below
 
 # current gcc version on openwrt (5.3.0) gives warnings which it must not give
 # (clang-4.0.1 and gcc-7.2.0 on my computer do not give them), so disable sign-conversion warnings
 CC=th-gcc -Wno-sign-conversion
 
 THD_COMPS := thd keystate trigger eventnames devices cmdsocket obey ignore uinput triggerparser
-THCMD_COMPS := th-cmd cmdsocket
 
 MAKEDEPEND = th-gcc -M -MG $(CFLAGS) -o $*.d $<
 
-all: thd th-cmd
+all: thd
 
 thd: $(THD_COMPS:%=%.o)
-
-th-cmd: $(THCMD_COMPS:%=%.o)
 
 clean:
 	rm -f *.d
 	rm -f *.o
-	rm -f thd th-cmd
-	rm -f thd.1 th-cmd.1
+	rm -f thd
 
 ifeq ($(shell whereami),home)
 VENDORID=13ba
@@ -46,7 +38,7 @@ boot: all
 %.d : %.c
 	$(MAKEDEPEND)
 
--include $(THD_COMPS:%=%.d) $(THCMD_COMPS:%=%.d)
+-include $(THD_COMPS:%=%.d)
 
 prog: prog.c
 	th-gcc -o $@ $<
