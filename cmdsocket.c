@@ -86,9 +86,6 @@ struct command *read_command( int cmd_fd ) {
 }
 
 int send_command( int cmd_fd, enum command_type type, char *param, int passfd, int exclusive, char *tag ) {
-	if (type == CMD_ADD && passfd == 1) {
-		type = CMD_PASSFD;
-	}
 	struct command cmd = {
 		.fd    = -1,
 		.exclusive = exclusive,

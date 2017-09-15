@@ -1,4 +1,4 @@
-TODO: get rid of th-cmd and its dependencies
+TODO: get rid of th-cmd and its dependencies (obey.c, cmdsocket.c, et al.)
 
 Start (specify --daemon to background it, but without it you will see helpful messages):
 

@@ -88,35 +88,34 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	if ( op_add + op_rem + op_clear + op_udev + op_en + op_dis + op_mode + op_quit != 1 ) {
+	if (op_add + op_rem + op_clear + op_udev + op_en + op_dis + op_mode + op_quit != 1) {
 		fprintf(stderr, "A single command must be specified!\n");
 		show_help();
 		return 1;
 	}
 
-	if (! socket ) {
+	if (!socket) {
 		fprintf(stderr, "No socket specified!\n");
 		show_help();
 		return 1;
 	}
-	int s = connect_cmdsocket( socket );
+	int s = connect_cmdsocket(socket);
 	if (s < 0) {
-		perror("connect()");
+		fprintf(stderr, "connect: %m\n");
 		return 1;
 	}
 
 	int err = 0;
 	if (op_udev) {
-		if (strcasecmp("add", getenv("ACTION")) == 0) {
+		if (strcasecmp("add", getenv("ACTION")) == 0)
 			ctype = CMD_ADD;
-		} else if (strcasecmp("remove", getenv("ACTION")) == 0) {
+		else if (strcasecmp("remove", getenv("ACTION")) == 0)
 			ctype = CMD_REMOVE;
-		}
 		char *dev = getenv("DEVNAME");
-		if ( ctype && dev ) {
-			err = send_command( s, ctype, dev, passfd, grab_dev, NULL );
-		}
-	} else {
+		if (ctype && dev)
+			err = send_command(s, ctype, dev, passfd, grab_dev, NULL);
+	}
+	else {
 		/* get devices from command line */
 		if (op_add) ctype = CMD_ADD;
 		else if (op_rem) ctype = CMD_REMOVE;
@@ -126,10 +125,10 @@ int main(int argc, char *argv[]) {
 		else if (op_mode) ctype = CMD_CHANGEMODE;
 		else if (op_quit) ctype = CMD_QUIT;
 
-		if ( ctype == CMD_NOP) {
-			show_help();
-		}
 		switch (ctype) {
+			case CMD_NOP:
+				show_help();
+				break;
 			case CMD_CLEARDEVS:
 			case CMD_ENABLE:
 			case CMD_DISABLE:
@@ -147,8 +146,6 @@ int main(int argc, char *argv[]) {
 					err = send_command( s, ctype, argv[optind++], passfd, grab_dev, tag );
 				}
 				break;
-			default:
-				err = 1;
 		}
 		if (err != 0) {
 			fprintf( stderr, "Error sending command\n");
