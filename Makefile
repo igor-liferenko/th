@@ -5,6 +5,8 @@ DESTDIR:=/var/local/x86-builder/files
 BINDIR:=$(DESTDIR)/usr/sbin
 MANDIR:=$(DESTDIR)/usr/share/man/man1
 
+# current gcc version on openwrt (5.3.0) gives warnings which it must not give
+# (clang-4.0.1 and gcc-7.2.0 on my computer do not give them), so disable sign-conversion warnings
 CC=th-gcc -Wno-sign-conversion
 
 THD_COMPS := thd keystate trigger eventnames devices cmdsocket obey ignore uinput triggerparser
