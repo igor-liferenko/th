@@ -1,15 +1,9 @@
 TODO: get rid of th-cmd and its dependencies (obey.c, cmdsocket.c, et al.)
 
-Start (specify --daemon to background it, but without it you will see helpful messages
-       (FIXME: see how it is determined that we are not a daemon - maybe use the same method
-       in tel.w)):
+Start (do not specify --daemon if you want messages to go to stdout):
 
-	thd --triggers /etc/triggerhappy/triggers.d/ /dev/input/event*
+	thd --daemon --triggers /etc/triggerhappy/triggers.d/ /dev/input/event*
 
 Dump all events:
 
 	thd --dump /dev/input/event*
-
-Devices can be added dynamically by specifying a command socket:
-
-	thd --socket /var/run/triggerhappy.socket --triggers /etc/triggerhappy.d/
