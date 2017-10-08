@@ -31,7 +31,7 @@ cat << EOF > files/etc/uci-defaults/my
 uci set network.lan.proto=dhcp
 uci commit network
 EOF
-make info; exit # make image PROFILE=???? PACKAGES="nfs-utils kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
+make info; exit # make image PROFILE=???? PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
 gunzip bin/x86/openwrt-x86-64-combined-ext4.img.gz
 rm -fr /var/local/x86/
 mkdir /var/local/x86/
