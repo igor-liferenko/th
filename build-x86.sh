@@ -1,16 +1,19 @@
 #!/bin/bash -x
+# https://wiki.openwrt.org/doc/howto/obtain.firmware.generate
 
-# https://wiki.openwrt.org/doc/howto/build
+# FIXME: is vsyscall=emulate needed here?
 
-export PATH=$PATH:~/openwrt/x86/staging_dir/host/bin
-
+IMG=OpenWrt-ImageBuilder-x86-64.Linux-x86_64
+SDK=OpenWrt-SDK-x86-64_gcc-5.3.0_musl-1.1.16.Linux-x86_64
 mkdir -p ~/openwrt
 cd ~/openwrt
-[ -d x86 ] && exit
-git clone git://github.com/openwrt/openwrt.git x86
+[ -e $IMG.tar.bz2 ] || wget https://downloads.openwrt.org/snapshots/trunk/x86/64/$IMG.tar.bz2 || exit
+[ -e $SDK.tar.bz2 ] || wget https://downloads.openwrt.org/snapshots/trunk/x86/64/$SDK.tar.bz2 || exit
+rm -fr x86/
+mkdir x86/
 cd x86/
-./scripts/feeds update packages
-./scripts/feeds install nfs-utils
+tar -jxf ../$IMG.tar.bz2
+cd $IMG/
 mkdir -p files/etc/
 mkdir -p files/usr/sbin/
 ln -s /mnt/conf/ files/etc/triggerhappy
@@ -28,34 +31,7 @@ cat << EOF > files/etc/uci-defaults/my
 uci set network.lan.proto=dhcp
 uci commit network
 EOF
-cat << EOF > .config
-CONFIG_TARGET_x86=y
-CONFIG_TARGET_x86_64=y
-CONFIG_TARGET_x86_64_Generic=y
-CONFIG_DEVEL=y
-CONFIG_BUILD_NLS=y
-CONFIG_SDK=y
-CONFIG_PACKAGE_iconv=y
-CONFIG_PACKAGE_libcharset=y
-CONFIG_PACKAGE_libiconv-full=y
-CONFIG_PACKAGE_libintl-full=y
-CONFIG_BUSYBOX_CUSTOM=y
-CONFIG_BUSYBOX_CONFIG_LAST_SUPPORTED_WCHAR=0
-CONFIG_BUSYBOX_CONFIG_LOCALE_SUPPORT=y
-CONFIG_BUSYBOX_CONFIG_SUBST_WCHAR=65533
-CONFIG_BUSYBOX_CONFIG_UNICODE_PRESERVE_BROKEN=y
-CONFIG_BUSYBOX_CONFIG_UNICODE_SUPPORT=y
-CONFIG_BUSYBOX_CONFIG_UNICODE_USING_LOCALE=y
-CONFIG_PACKAGE_kmod-nls-utf8=y
-CONFIG_PACKAGE_kmod-fs-nfs=y
-CONFIG_PACKAGE_nfs-utils=y
-CONFIG_PACKAGE_kmod-usb-hid=y
-CONFIG_PACKAGE_kmod-hid-generic=y
-CONFIG_PACKAGE_kmod-usb-ohci=y
-CONFIG_ALL_KMODS=y
-EOF
-make defconfig
-make
+make info; exit # make image PROFILE=???? PACKAGES="nfs-utils kmod-usb-hid kmod-hid-generic kmod-usb-ohci" FILES=files/
 gunzip bin/x86/openwrt-x86-64-combined-ext4.img.gz
 rm -fr /var/local/x86/
 mkdir /var/local/x86/
