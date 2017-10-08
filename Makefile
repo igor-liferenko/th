@@ -42,3 +42,9 @@ boot: all
 
 prog: prog.c
 	th-gcc -o $@ $<
+
+
+#if you want to transport a file with scp from host to guest, start the guest with
+# "-device e1000,netdev=user.0 -netdev user,id=user.0,hostfwd=tcp::5555-:22"
+# Now you are forwarding the host port 5555 to the guest port 22. After starting up the guest,
+# you can transport a file with e.g. "scp -P 5555 file.txt root@localhost:/tmp" from host to guest
