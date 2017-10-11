@@ -1,7 +1,10 @@
 #!/bin/bash -x
 # https://wiki.openwrt.org/doc/howto/obtain.firmware.generate
 
-# NOTE: add vsyscall=emulate to grub because of this script terminates with segfault (revert afterwards)
+if ! grep -q vsyscall=emulate /etc/default/grub; then
+  echo add vsyscall=emulate to grub
+  exit
+fi
 
 IMG=OpenWrt-ImageBuilder-x86-64.Linux-x86_64
 SDK=OpenWrt-SDK-x86-64_gcc-5.3.0_musl-1.1.16.Linux-x86_64
@@ -45,3 +48,5 @@ cp ../../$SDK.tar.bz2 /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
 cp bin/x86/openwrt-x86-64-combined-ext4.img /var/local/x86/x86.img
 rm -f /usr/local/SUPER_DEBIAN/x86.img
 cp bin/x86/openwrt-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
+
+echo -e '\n********** remove vsyscall=emulate from grub ************'
