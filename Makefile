@@ -32,7 +32,7 @@ endif
 boot: all
 	@! test -e lock-image || ( echo ALREADY RUNNING; false )
 	@touch lock-image
-	@cd /var/local/x86/ && qemu-system-x86_64 `if [ $$(whereami) != notebook ]; then echo -enable-kvm; fi` -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID} -device e1000,netdev=user.0 -netdev user,id=user.0,hostfwd=tcp::5555-:22
+	@cd /var/local/x86/ && qemu-system-x86_64 `if [ $$(whereami) != notebook ]; then echo -enable-kvm; fi` -drive format=raw,file=x86.img -daemonize -serial null -parallel null -monitor none -display none -vga none -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID} -net user,hostfwd=tcp::5555-:22 -net nic -m 64 # the "whereami" test is necessary because -enable-kvm option does not work on notebook
 	@rm lock-image
 
 %.d : %.c
@@ -43,8 +43,4 @@ boot: all
 prog: prog.c
 	th-gcc -o $@ $<
 
-
-#if you want to transport a file with scp from host to guest, start the guest with
-# "-device e1000,netdev=user.0 -netdev user,id=user.0,hostfwd=tcp::5555-:22"
-# Now you are forwarding the host port 5555 to the guest port 22. After starting up the guest,
-# you can transport a file with e.g. "scp -P 5555 file.txt root@localhost:/tmp" from host to guest
+#TODO: use ps -ef|grep qemu... instead of lock-image
