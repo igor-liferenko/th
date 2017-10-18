@@ -22,8 +22,8 @@ ifeq ($(shell whereami),home)
 VENDORID=13ba
 PRODUCTID=0001
 else ifeq ($(shell whereami),notebook)
-VENDORID=1c4f
-PRODUCTID=0002
+VENDORID=0403
+PRODUCTID=6001
 else
 VENDORID=04d9
 PRODUCTID=1702
@@ -32,7 +32,7 @@ endif
 boot: all
 	@! test -e lock-image || ( echo ALREADY RUNNING; false )
 	@touch lock-image
-	@cd /var/local/x86/ && qemu-system-x86_64 -enable-kvm -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID}
+	@cd /var/local/x86/ && qemu-system-x86_64 `if [ $$(whereami) != notebook ]; then echo -enable-kvm; fi` -drive format=raw,file=x86.img -nographic -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID} -device e1000,netdev=user.0 -netdev user,id=user.0,hostfwd=tcp::5555-:22
 	@rm lock-image
 
 %.d : %.c
