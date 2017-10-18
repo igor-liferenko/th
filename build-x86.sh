@@ -33,6 +33,8 @@ mkdir -p files/etc/uci-defaults/
 cat << EOF > files/etc/uci-defaults/my
 uci set network.lan.proto=dhcp
 uci commit network
+uci set system.@system[0].timezone=GMT-7
+uci commit system
 EOF
 make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci kmod-usb-serial-ftdi mpc" FILES=files/
 gunzip bin/x86/openwrt-x86-64-combined-ext4.img.gz
