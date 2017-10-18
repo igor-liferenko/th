@@ -30,10 +30,8 @@ PRODUCTID=1702
 endif
 
 boot: all
-	@! test -e lock-image || ( echo ALREADY RUNNING; false )
-	@touch lock-image
-	@cd /var/local/x86/ && qemu-system-x86_64 `if [ $$(whereami) != notebook ]; then echo -enable-kvm; fi` -drive format=raw,file=x86.img -daemonize -serial null -parallel null -monitor none -display none -vga none -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID} -net user,hostfwd=tcp::5555-:22 -net nic -m 64 # the "whereami" test is necessary because -enable-kvm option does not work on notebook
-	@rm lock-image
+	@! ps -ef | grep -q [q]emu-system-x86_64 || ( echo ALREADY RUNNING; false )
+	@cd /var/local/x86/ && qemu-system-x86_64 -m 64 `if [ $$(whereami) != notebook ]; then echo -enable-kvm; fi` -drive format=raw,file=x86.img -daemonize -serial null -parallel null -monitor none -display none -vga none -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID} -net user,hostfwd=tcp::5555-:22 -net nic # the "whereami" test is necessary because -enable-kvm option does not work on notebook
 
 %.d : %.c
 	$(MAKEDEPEND)
@@ -42,5 +40,3 @@ boot: all
 
 prog: prog.c
 	th-gcc -o $@ $<
-
-#TODO: use ps -ef|grep qemu... instead of lock-image
