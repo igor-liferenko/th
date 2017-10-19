@@ -29,8 +29,8 @@ VENDORID=04d9
 PRODUCTID=1702
 endif
 
-# TODO: vendorid/productid check is too general - other devices may fall into it, so better change "-device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID}" to "-device usb-host,hostbus=2,hostaddr=3"
-# Use this command to set "hostbus" and "hostaddr" values automatically:
+# TODO: vendorid/productid check is too general - other devices may fall into it, so better change "-device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID}" to "-device usb-host,hostbus=X,hostaddr=Y"
+# Use this command to get X and Y values for above command (the first line of output is X, the second - Y):
 # udevadm info --name=/dev/ttyUSB0 --attribute-walk | sed -n 's/\s*ATTRS{\(\(devnum\)\|\(busnum\)\)}==\"\([^\"]\+\)\"/\4/p' | head -n 2
 # Finally, use udev rule which sets SYMLINK+="unique_name" for a specific device and use /dev/unique_name instead of /dev/ttyUSB0 in above command.
 boot: all
