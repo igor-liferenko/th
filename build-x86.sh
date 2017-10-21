@@ -1,21 +1,16 @@
 #!/bin/bash -x
 # https://wiki.openwrt.org/doc/howto/obtain.firmware.generate
 
-if ! grep -q vsyscall=emulate /etc/default/grub; then
-  echo add vsyscall=emulate to grub
-  exit
-fi
-
-IMG=OpenWrt-ImageBuilder-x86-64.Linux-x86_64
-SDK=OpenWrt-SDK-x86-64_gcc-5.3.0_musl-1.1.16.Linux-x86_64
-mkdir -p ~/openwrt
-cd ~/openwrt
-[ -e $IMG.tar.bz2 ] || wget https://downloads.openwrt.org/snapshots/trunk/x86/64/$IMG.tar.bz2 || exit
-[ -e $SDK.tar.bz2 ] || wget https://downloads.openwrt.org/snapshots/trunk/x86/64/$SDK.tar.bz2 || exit
+IMG=lede-imagebuilder-x86-64.Linux-x86_64
+SDK=lede-sdk-x86-64_gcc-5.5.0_musl.Linux-x86_64
+mkdir -p ~/lede
+cd ~/lede
+[ -e $IMG.tar.xz ] || wget https://downloads.lede-project.org/snapshots/targets/x86/64/$IMG.tar.xz || exit
+[ -e $SDK.tar.xz ] || wget https://downloads.lede-project.org/snapshots/targets/x86/64/$SDK.tar.xz || exit
 rm -fr x86/
 mkdir x86/
 cd x86/
-tar -jxf ../$IMG.tar.bz2
+tar -Jxf ../$IMG.tar.xz
 cd $IMG/
 mkdir -p files/etc/
 mkdir -p files/usr/sbin/
@@ -37,18 +32,16 @@ uci set system.@system[0].timezone=GMT-7
 uci commit system
 EOF
 make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci kmod-usb-serial-ftdi mpc" FILES=files/
-gunzip bin/x86/openwrt-x86-64-combined-ext4.img.gz
+gunzip bin/targets/x86/64/lede-x86-64-combined-ext4.img.gz
 rm -fr /var/local/x86/
 mkdir /var/local/x86/
 # copy sdk:
-tar -C /var/local/x86 -jxf ../../$SDK.tar.bz2
+tar -C /var/local/x86 -Jxf ../../$SDK.tar.xz
 rm -f /var/local/x86-sdk
 ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
-rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
-cp ../../$SDK.tar.bz2 /usr/local/SUPER_DEBIAN/x86-sdk.tar.bz2
+rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
+cp ../../$SDK.tar.xz /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
 # copy img:
-cp bin/x86/openwrt-x86-64-combined-ext4.img /var/local/x86/x86.img
+cp bin/targets/x86/64/lede-x86-64-combined-ext4.img /var/local/x86/x86.img
 rm -f /usr/local/SUPER_DEBIAN/x86.img
-cp bin/x86/openwrt-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
-
-echo -e '\n********** remove vsyscall=emulate from grub ************'
+cp bin/targets/x86/64/lede-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
