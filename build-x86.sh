@@ -1,12 +1,12 @@
 #!/bin/bash -x
 # https://wiki.openwrt.org/doc/howto/obtain.firmware.generate
 
-IMG=lede-imagebuilder-x86-64.Linux-x86_64
-SDK=lede-sdk-x86-64_gcc-5.5.0_musl.Linux-x86_64
+IMG=lede-imagebuilder-17.01.4-x86-64.Linux-x86_64
+SDK=lede-sdk-17.01.4-x86-64_gcc-5.4.0_musl-1.1.16.Linux-x86_64
 mkdir -p ~/lede
 cd ~/lede
-[ -e $IMG.tar.xz ] || wget https://downloads.lede-project.org/snapshots/targets/x86/64/$IMG.tar.xz || exit
-[ -e $SDK.tar.xz ] || wget https://downloads.lede-project.org/snapshots/targets/x86/64/$SDK.tar.xz || exit
+[ -e $IMG.tar.xz ] || wget https://downloads.lede-project.org/releases/17.01.4/targets/x86/64/$IMG.tar.xz || exit
+[ -e $SDK.tar.xz ] || wget https://downloads.lede-project.org/releases/17.01.4/targets/x86/64/$SDK.tar.xz || exit
 rm -fr x86/
 mkdir x86/
 cd x86/
@@ -32,7 +32,7 @@ uci set system.@system[0].timezone=GMT-7
 uci commit system
 EOF
 make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci kmod-usb-serial-ftdi mpc" FILES=files/
-gunzip bin/targets/x86/64/lede-x86-64-combined-ext4.img.gz
+gunzip bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img.gz
 rm -fr /var/local/x86/
 mkdir /var/local/x86/
 # copy sdk:
@@ -42,6 +42,6 @@ ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
 rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
 cp ../../$SDK.tar.xz /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
 # copy img:
-cp bin/targets/x86/64/lede-x86-64-combined-ext4.img /var/local/x86/x86.img
+cp bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img /var/local/x86/x86.img
 rm -f /usr/local/SUPER_DEBIAN/x86.img
-cp bin/targets/x86/64/lede-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
+cp bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
