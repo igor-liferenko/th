@@ -1,5 +1,4 @@
 #!/bin/bash -x
-# https://wiki.openwrt.org/doc/howto/obtain.firmware.generate
 
 IMG=lede-imagebuilder-17.01.4-x86-64.Linux-x86_64
 SDK=lede-sdk-17.01.4-x86-64_gcc-5.4.0_musl-1.1.16.Linux-x86_64
