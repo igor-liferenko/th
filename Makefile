@@ -37,7 +37,7 @@ endif
 boot: all
 	@! ps h -fC qemu-system-x86_64 | grep -v newcd-qemu | grep -q . || ( echo ALREADY RUNNING; false )
 	@cd /var/local/x86/ && qemu-system-x86_64 -m 64 `if [ $$(whereami) != notebook ]; then echo -enable-kvm; fi` -drive format=raw,file=x86.img -daemonize -serial null -parallel null -monitor none -display none -vga none -usb -device usb-host,bus=usb-bus.0,vendorid=0x${VENDORID},productid=0x${PRODUCTID} -net user,hostfwd=tcp::5555-:22 -net nic # the "whereami" test is necessary because -enable-kvm option does not work on notebook
-	@echo connect with ssh -p 5555 root@localhost
+	@echo 'connect with "ssh th"'
 
 %.d : %.c
 	$(MAKEDEPEND)
