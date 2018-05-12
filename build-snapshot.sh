@@ -34,4 +34,4 @@ tar -C /var/local/x86 -Jxf ../../$SDK.tar.xz
 rm -f /var/local/x86-sdk
 ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
 # copy img:
-cp bin/targets/x86/64/openwrt-x86-64-combined-ext4.img.gz /var/local/x86/x86.img
+cp bin/targets/x86/64/openwrt-x86-64-combined-ext4.img /var/local/x86/x86.img
