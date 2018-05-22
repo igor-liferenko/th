@@ -30,7 +30,7 @@ uci commit network
 uci set system.@system[0].timezone=GMT-7
 uci commit system
 EOF
-make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci kmod-usb-serial-ftdi mpc" FILES=files/
+make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-uhci kmod-usb-acm mpc" FILES=files/
 gunzip bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img.gz
 rm -fr /var/local/x86/
 mkdir /var/local/x86/
