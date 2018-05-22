@@ -38,9 +38,5 @@ mkdir /var/local/x86/
 tar -C /var/local/x86 -Jxf ../../$SDK.tar.xz
 rm -f /var/local/x86-sdk
 ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
-rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
-cp ../../$SDK.tar.xz /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
 # copy img:
 cp bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img /var/local/x86/x86.img
-rm -f /usr/local/SUPER_DEBIAN/x86.img
-cp bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
