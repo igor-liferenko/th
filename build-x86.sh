@@ -30,7 +30,7 @@ uci commit network
 uci set system.@system[0].timezone=GMT-7
 uci commit system
 EOF
-make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-uhci kmod-usb-acm mpc" FILES=files/
+make image PROFILE=Generic PACKAGES="nfs-utils kmod-fs-nfs kmod-usb-hid kmod-hid-generic kmod-usb-ohci kmod-usb-serial-ftdi mpc" FILES=files/
 gunzip bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img.gz
 rm -fr /var/local/x86/
 mkdir /var/local/x86/
@@ -38,5 +38,9 @@ mkdir /var/local/x86/
 tar -C /var/local/x86 -Jxf ../../$SDK.tar.xz
 rm -f /var/local/x86-sdk
 ln -s /var/local/x86/*/staging_dir/toolchain* /var/local/x86-sdk
+rm -f /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
+cp ../../$SDK.tar.xz /usr/local/SUPER_DEBIAN/x86-sdk.tar.xz
 # copy img:
 cp bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img /var/local/x86/x86.img
+rm -f /usr/local/SUPER_DEBIAN/x86.img
+cp bin/targets/x86/64/lede-17.01.4-x86-64-combined-ext4.img /usr/local/SUPER_DEBIAN/x86.img
