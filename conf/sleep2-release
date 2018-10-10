@@ -1,2 +1,0 @@
-#!/bin/sh
-kill -INT `ps|grep {sleep[2]}|grep -vw R|awk '{print$1}'`

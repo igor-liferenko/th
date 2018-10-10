@@ -1,9 +1,0 @@
-TODO: get rid of th-cmd and its dependencies (obey.c, cmdsocket.c, et al.)
-
-Start (do not specify --daemon if you want messages to go to stdout):
-
-	thd --daemon --triggers /etc/triggerhappy/triggers.d/ /dev/input/event*
-
-Dump all events:
-
-	thd --dump /dev/input/event*
