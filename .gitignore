@@ -1,9 +1,0 @@
-thd
-*.o
-/*.d
-*.log
-*.dvi
-*.ps
-prog
-prog.c
-lock-image
