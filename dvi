@@ -9,11 +9,9 @@ export err=/tmp/err.$$
 ret=$?
 if [ -e $err ]; then
   echo DVIPS ERROR
-  rm -f $1.pdf $err
-  exit
+  rm -f $1.pdf
 elif [ $ret != 0 ]; then
   echo PS2PDF ERROR
-  rm -f $1.pdf $err
-  exit
+  rm -f $1.pdf
 fi
 rm -f $err
