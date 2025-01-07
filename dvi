@@ -1,5 +1,15 @@
 #!/bin/sh
 file=$1.dvi
+for i in `dvitype -output-level 0 $file | sed -n '/^Postamble starts at byte/,${s/^Font [0-9]\+: \([.
+  if [ $i = ${i#*/} ]; then
+    grep -q "^$i " ~/th/*.map && continue;
+    echo PK fonts not appropriate in PDF
+    exit
+  else
+    echo Fonts with path not allowed in map-file
+    exit
+  fi
+done
 eval "$(hexdump -s15 -n `hexdump -s14 -n1 -e '"%u"' $file` -v -e '"%c"' $file | sed 's/.* /p=/;s/x/sp,/;s/[+-][0-9]*/sp x=& y=/')"
 export TEXCONFIG=~/th:~/dvips
 export DVIPSHEADERS=~/th/pfb:~/dvips
@@ -12,11 +22,11 @@ ret=$?
 if [ -e $err ]; then
   echo DVIPS ERROR
   rm -f $1.pdf $err
-  exit 1
+  exit
 elif [ $ret != 0 ]; then
   echo PS2PDF ERROR
   rm -f $1.pdf $err
-  exit 1
+  exit
 fi
 rm -f $err
 ~/mytex/open $1.pdf
