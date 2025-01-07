@@ -1,10 +1,11 @@
 #!/bin/bash
 
-rm -f pfb/om* pfb/OM*
+rm -f pfb/om* pfb/OM* omfonts.map
 function gen() {
   for i in "${@:2:$#}"; do
     mftrace --formats=pfb --encoding=enc/$1 $i || { echo "*********** $i FAILED ************"; exit; }
     mv $i.pfb pfb/
+    echo "$i <$i.pfb" >>omfonts.map
   done
 }
 gen roman0csc0 \
