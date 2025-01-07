@@ -4,7 +4,7 @@ rm -fr pfb
 mkdir pfb
 function gen() {
   for i in "${@:2:$#}"; do
-    mftrace --formats=pfb --encoding=enc/$1 --magnification=2000 $i || echo "*********** $i FAILED *************"
+    mftrace --formats=pfb --encoding=enc/$1 $i || echo "*********** $i FAILED *************"
     mv $i.pfb pfb/
   done
 }
@@ -13,6 +13,8 @@ gen roman0csc0 \
   omtcsc10 \
   omtt10 \
   omtt12 \
+  omtt14 \
+  omtt17 \
   omtt8 \
   omtt9
 gen roman1csc1 \
@@ -22,6 +24,8 @@ gen roman2 \
   omb10 \
   ombx10 \
   ombx12 \
+  ombx14 \
+  ombx17 \
   ombx5 \
   ombx6 \
   ombx7 \
@@ -33,6 +37,7 @@ gen roman2 \
   omfib8 \
   omr10 \
   omr12 \
+  omr14 \
   omr17 \
   omr6 \
   omr7 \
@@ -40,6 +45,8 @@ gen roman2 \
   omr9 \
   omsl10 \
   omsl12 \
+  omsl14 \
+  omsl17 \
   omsl8 \
   omsl9 \
   omss10 \
@@ -64,6 +71,8 @@ gen textit2 \
   omfi10 \
   omti10 \
   omti12 \
+  omti14 \
+  omti17 \
   omti7 \
   omti8 \
   omti9 \
