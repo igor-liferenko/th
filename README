@@ -1,0 +1,5 @@
+The 'dvi' script is to be used (together with dvi+ and dvi-) on systems where
+there is no TeX (on systems with TeX, TEX file can be used and therefore
+copy-search is done in it).
+
+WARNING: the 'dvi' script is not supposed to be used on DVI files with ./ fonts
