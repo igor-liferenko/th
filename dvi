@@ -5,13 +5,21 @@ export TEXCONFIG=~/th:~/dvips
 export DVIPSHEADERS=~/th/pfb:~/dvips
 export TEXFONTS=~/tex/TeXfonts
 export err=/tmp/err.$$
-( ~/dvips/dvips -t a4 -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o /dev/stdout $file || touch $err ) | ps2pdf - $1.pdf
+( ~/dvips/dvips -t a4 -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o /dev/stdout -M $file || touch $err ) | ps2pdf - $1.pdf
 ret=$?
+if [ -e missfont.log ]; then
+  echo Bitmap fonts are not allowed in PDF
+  rm -f missfont.log $1.pdf $err
+  exit
+fi
 if [ -e $err ]; then
   echo DVIPS ERROR
-  rm -f $1.pdf
+  rm -f $1.pdf $err
+  exit
 elif [ $ret != 0 ]; then
   echo PS2PDF ERROR
-  rm -f $1.pdf
+  rm -f $1.pdf $err
+  exit
 fi
 rm -f $err
+~/mytex/open $1.pdf
