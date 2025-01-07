@@ -1,7 +1,6 @@
 #!/bin/bash
 
-rm -fr pfb
-mkdir pfb
+rm -f pfb/om* pfb/OM*
 function gen() {
   for i in "${@:2:$#}"; do
     mftrace --formats=pfb --encoding=enc/$1 $i || { echo "*********** $i FAILED ************"; exit; }
