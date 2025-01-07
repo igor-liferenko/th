@@ -3,3 +3,71 @@ there is no TeX (on systems with TeX, TEX file can be used and therefore
 copy-search is done in it).
 
 WARNING: the 'dvi' script is not supposed to be used on DVI files with ./ fonts
+
+------------------------------------
+
+pfb/cm* were taken from https://www.ams.org/arc/tex/amsfonts.zip
+and processed by:
+
+t1disasm cmb10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmb10.pfb
+t1disasm cmbx10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx10.pfb
+t1disasm cmbx12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx12.pfb
+t1disasm cmbx5.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx5.pfb
+t1disasm cmbx6.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx6.pfb
+t1disasm cmbx7.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx7.pfb
+t1disasm cmbx8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx8.pfb
+t1disasm cmbx9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbx9.pfb
+t1disasm cmbxsl10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbxsl10.pfb
+t1disasm cmbxti10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmbxti10.pfb
+t1disasm cmcsc10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmcsc10.pfb
+t1disasm cmdunh10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmdunh10.pfb
+t1disasm cmff10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmff10.pfb
+t1disasm cmfi10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmfi10.pfb
+t1disasm cmfib8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmfib8.pfb
+t1disasm cmitt10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmitt10.pfb
+t1disasm cmr10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr10.pfb
+t1disasm cmr12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr12.pfb
+t1disasm cmr17.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr17.pfb
+t1disasm cmr5.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr5.pfb
+t1disasm cmr6.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr6.pfb
+t1disasm cmr7.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr7.pfb
+t1disasm cmr8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr8.pfb
+t1disasm cmr9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmr9.pfb
+t1disasm cmsl10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmsl10.pfb
+t1disasm cmsl12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmsl12.pfb
+t1disasm cmsl8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmsl8.pfb
+t1disasm cmsl9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmsl9.pfb
+t1disasm cmsltt10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmsltt10.pfb
+t1disasm cmss10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmss10.pfb
+t1disasm cmss12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmss12.pfb
+t1disasm cmss17.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmss17.pfb
+t1disasm cmss8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmss8.pfb
+t1disasm cmss9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmss9.pfb
+t1disasm cmssbx10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssbx10.pfb
+t1disasm cmssdc10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssdc10.pfb
+t1disasm cmssi10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssi10.pfb
+t1disasm cmssi12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssi12.pfb
+t1disasm cmssi17.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssi17.pfb
+t1disasm cmssi8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssi8.pfb
+t1disasm cmssi9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssi9.pfb
+t1disasm cmssq8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssq8.pfb
+t1disasm cmssqi8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmssqi8.pfb
+t1disasm cmtcsc10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtcsc10.pfb
+t1disasm cmtex10.pfb | sed s^/minus^/uni002D^ | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtex10.pfb
+t1disasm cmtex8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtex8.pfb
+t1disasm cmtex9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtex9.pfb
+t1disasm cmti10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmti10.pfb
+t1disasm cmti12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmti12.pfb
+t1disasm cmti7.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmti7.pfb
+t1disasm cmti8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmti8.pfb
+t1disasm cmti9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmti9.pfb
+t1disasm cmtt10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtt10.pfb
+t1disasm cmtt12.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtt12.pfb
+t1disasm cmtt8.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtt8.pfb
+t1disasm cmtt9.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmtt9.pfb
+t1disasm cmu10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmu10.pfb
+t1disasm cmvtt10.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | t1asm -o pfb/cmvtt10.pfb
+
+------------------------------------
+
+pfb/niceframe.pfb was taken from https://mirrors.ctan.org/fonts/niceframe.zip
