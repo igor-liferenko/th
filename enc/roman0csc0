@@ -38,7 +38,7 @@
 /dollar % 36
 /percent % 37
 /ampersand % 38
-/quoteright % 39
+/uni0027 % 39
 /parenleft % 40
 /parenright % 41
 /asterisk % 42
@@ -95,7 +95,7 @@
 /bracketright % 93
 /asciicircum % 94
 /underscore % 95
-/quoteleft % 96
+/uni0060 % 96
 /a % 97
 /b % 98
 /c % 99
