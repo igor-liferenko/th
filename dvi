@@ -8,7 +8,7 @@ export err=/tmp/err.$$
 ( ~/dvips/dvips -t a4 -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o /dev/stdout -M $file || touch $err ) | ps2pdf - $1.pdf
 ret=$?
 if [ -e missfont.log ]; then
-  echo Bitmap fonts are not allowed in PDF
+  echo PK fonts not appropriate in PDF
   rm -f missfont.log $1.pdf $err
   exit
 fi
