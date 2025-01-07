@@ -1,0 +1,17 @@
+#!/bin/sh
+file=$1.dvi
+eval "$(hexdump -s15 -n `hexdump -s14 -n1 -e '"%u"' $file` -v -e '"%c"' $file | sed 's/.* /p=/;s/x/sp,/;s/[+-][0-9]*/sp x=& y=/')"
+export TEXCONFIG=~/th:~/dvips
+export DVIPSHEADERS=~/th:~/dvips
+#? export TEXFONTS=~/tex/TeXfonts
+t=a4
+[ $p = 55380990sp,39158276sp ] && t='a4 -t landscape'
+export err=/tmp/err.$$
+~/th/dvips -t $t -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o - $file | ps2pdf - $1.pdf
+ret=$?
+if [ -e $err ]; then
+  echo DVIPS ERROR
+elif [ $ret != 0 ]; then
+  echo PS2PDF ERROR
+fi
+rm -f $err
