@@ -1,3 +1,0 @@
-#!/bin/sh
-~/dvips/dvips "$@"
-[ $? = 0 ] || touch $err
