@@ -22,4 +22,4 @@ elif [ $ret != 0 ]; then
   exit
 fi
 rm -f $err
-~/mytex/open $1.pdf
+xdg-open $1.pdf
