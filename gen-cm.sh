@@ -1,9 +1,3 @@
-if ! [ -e /tmp/amsfonts.zip ]; then
-  echo Download to /tmp https://www.ams.org/arc/tex/amsfonts.zip
-  exit
-fi
-rm -fr /tmp/cm/; mkdir /tmp/cm/
-unzip -j -d /tmp/cm /tmp/amsfonts.zip fonts/type1/public/amsfonts/cm/\*.pfb >/dev/null
 for i in \
   cmb10 \
   cmbx10 \
@@ -61,7 +55,7 @@ for i in \
   cmu10 \
   cmvtt10
 do \
-  t1disasm /tmp/cm/$i.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | \
+  t1disasm ~/lhplain/pfb/$i.pfb | sed s^/quoteleft^/uni0060^ | sed s^/quoteright^/uni0027^ | \
     t1asm -o pfb/$i.pfb
 done
 for i in \
@@ -69,6 +63,6 @@ for i in \
   cmtex8 \
   cmtex9
 do \
-  t1disasm /tmp/cm/$i.pfb | sed s^/minus^/uni002D^ | sed s^/quoteleft^/uni0060^ | \
+  t1disasm ~/lhplain/pfb/$i.pfb | sed s^/minus^/uni002D^ | sed s^/quoteleft^/uni0060^ | \
     sed s^/quoteright^/uni0027^ | t1asm -o pfb/$i.pfb
 done
