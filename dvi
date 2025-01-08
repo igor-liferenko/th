@@ -4,10 +4,10 @@ eval "$(hexdump -s15 -n `hexdump -s14 -n1 -e '"%u"' $file` -v -e '"%c"' $file | 
 export TEXCONFIG=~/th:~/dvips
 export DVIPSHEADERS=~/th/pfb:~/dvips
 export TEXFONTS=~/tex/TeXfonts
-t=a4
-[ ${p#*,} \< ${p%,*} ] && t='a4 -t landscape'
 export err=/tmp/err.$$
-( ~/dvips/dvips -t $t -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o /dev/stdout -M $file || touch $err ) | ps2pdf - $1.pdf
+( ~/dvips/dvips -t a4 `[ ${p#*,} \< ${p%,*} ] && echo -t landscape` \
+  -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o /dev/stdout -M $file || touch $err ) | \
+  ps2pdf - $1.pdf
 ret=$?
 if [ -e missfont.log ]; then
   echo PK fonts not appropriate in PDF
