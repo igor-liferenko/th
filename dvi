@@ -1,7 +1,6 @@
 #!/bin/sh
 file=$1.dvi
-dvitype -output-level 0 $file | sed -n '/^Postamble starts at byte/,$p' | grep -q '^Font.*: \./' \
-  && { echo Fonts with path not allowed in map-file; exit 1; }
+dvitype -output-level 0 $file | grep -q '^Font.*/' && { echo Fonts with path not allowed in map-file; exit 1; }
 eval "$(hexdump -s15 -n `hexdump -s14 -n1 -e '"%u"' $file` -v -e '"%c"' $file | sed 's/.* /p=/;s/x/sp,/;s/[+-][0-9]*/sp x=& y=/')"
 export TEXCONFIG=~/th:~/dvips
 export DVIPSHEADERS=~/th/pfb:~/dvips
