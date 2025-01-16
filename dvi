@@ -1,20 +1,18 @@
 #!/bin/sh
 file=$1.dvi
-dvitype -output-level 0 $file | grep -q '^Font.*/' && { echo Fonts with path not allowed in map-file; exit 1; }
-eval "$(hexdump -s15 -n `hexdump -s14 -n1 -e '"%u"' $file` -v -e '"%c"' $file | sed 's/.* /p=/;s/x/sp,/;s/[+-][0-9]*/sp x=& y=/')"
-export TEXCONFIG=~/th:~/dvips
-export DVIPSHEADERS=~/th/pfb:~/dvips
-export TEXFONTS=~/tex/TeXfonts
-export err=/tmp/err.$$
-( ~/dvips/dvips -t a4 `[ ${p#*,} \< ${p%,*} ] && echo -t landscape` \
-  -O $((x-4736287))sp,$((y-4736287))sp -P t1 -q -o /dev/stdout -M $file 2>/dev/null || touch $err ) | \
-  ps2pdf - $1.pdf
-ret=$?
-if [ -e missfont.log ]; then
+dvitype -output-level 0 $file | grep -q '^Font.*/' && { echo Fonts with path not allowed in map-file; exit; }
+for i in `dvitype -output-level 0 $file | sed '/^Postamble starts at byte/,$!d;/^Font [0-9]\+:/!d;s///;s/ scaled [0-9]\+//' | sort | uniq`; do
+  grep -q "^$i " ~/th/*.map && continue;
   echo PK fonts not appropriate in PDF
-  rm -f missfont.log $1.pdf $err
   exit
-fi
+done
+eval "$(hexdump -s15 -n `hexdump -s14 -n1 -e '"%u"' $file` -v -e '"%c"' $file | sed 's/.* /p=/;s/x/sp,/;s/[+-][0-9]*/sp x=& y=/')"
+export TEXFONTS=~/tex/TeXfonts:~/th/pfb
+cat ~/th/*.map >/tmp/th.map
+export err=/tmp/err.$$
+( dvips -u /tmp/th.map -t a4 `[ ${p#*,} \< ${p%,*} ] && echo -t landscape` \
+  -O $((x-4736287))sp,$((y-4736287))sp -q -o - $file || touch $err ) | ps2pdf - $1.pdf
+ret=$?
 if [ -e $err ]; then
   echo DVIPS ERROR
   rm -f $1.pdf $err
