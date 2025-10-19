@@ -1,0 +1,7 @@
+In each document using QUIRE.tex add this after setting \hsize:
+    \advance\hsize by-\QUIRE
+and this to output routine:
+    \ifodd\pageno\else\hoffset=\QUIRE\fi
+
+Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire{...}'
+After connecting the pages with thread and needle, cut protruding parts of pages.
