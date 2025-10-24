@@ -1,3 +1,5 @@
+NOTE: this repo is a supplement to QUIRE.tex from mytex repo
+
 In each document using QUIRE.tex add this after setting \hsize:
     \advance\hsize by-\QUIRE
 and this to output routine:
