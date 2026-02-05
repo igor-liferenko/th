@@ -6,4 +6,9 @@ and this to output routine:
     \ifodd\pageno\else\hoffset=\QUIRE\fi
 
 Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire{...}'
-After connecting the pages with thread and needle, cut protruding parts of pages.
+After printing:
+1. bend each sheet in the middle
+2. connect the sheets with staples
+3. mark protruding part of upper sheet with sharp pencil and cut along the mark
+4. repeat step 3 for each sheet until reaching half of sheets
+5. overturn the document and go to step 3
