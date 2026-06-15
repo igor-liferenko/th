@@ -1,9 +1,2 @@
-NOTE: this repo is a supplement to QUIRE.tex from mytex repo
-
-In each document using QUIRE.tex add this after setting \hsize:
-    \advance\hsize by-\QUIRE
-and this to output routine:
-    \ifodd\pageno\else\hoffset=\QUIRE\fi
-
 Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire{...}'
-After printing bend each sheet in the middle.
+After printing, bend each sheet in the middle and cut.
