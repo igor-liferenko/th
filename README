@@ -1,2 +1,1 @@
 Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire{...}'
-After printing, bend each sheet in the middle.
