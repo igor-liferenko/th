@@ -27,3 +27,9 @@ Start mf file with %! line if you need to set geometry, for example:
 and are subsequently used as arguments to dvips.
 
 Use \pdfhorigin and \pdfvorigin to set margins (this is not the role of \hoffset and \voffset).
+
+PS is used instead of PDF because PS format allows to split document into pages, leaving the rest of the
+document intact. And page splitting is critical, because we can not generate only necessary pages in
+dvi-processing stage - we need to actually see all the pages to be able to choose which pages to print,
+which means that we must generate the whole document and open it in viewer - page splitting will be done
+at a later stage by viewer.
