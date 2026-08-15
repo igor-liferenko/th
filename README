@@ -33,3 +33,7 @@ document intact. And page splitting is critical, because we can not generate onl
 dvi-processing stage - we need to actually see all the pages to be able to choose which pages to print,
 which means that we must generate the whole document and open it in viewer - page splitting will be done
 at a later stage by viewer.
+
+For printing use only viewer which uses lpr program for printing (there are viewers that connect
+to cups socket directly). This allows to override lpr with ad-hoc program which sends the data directly
+to printer (after wrapping it in PJL commands).
