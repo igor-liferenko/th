@@ -35,5 +35,5 @@ which means that we must generate the whole document and open it in viewer - pag
 at a later stage by viewer.
 
 For printing use only viewer which uses lpr program for printing (there are viewers that connect
-to cups socket directly). This allows to override lpr with ad-hoc program which sends the data directly
-to printer (after wrapping it in PJL commands).
+to cups socket directly). This allows to override lpr with ad-hoc program which sends the PS data
+directly to printer (after wrapping it in PJL commands).
