@@ -1,1 +1,14 @@
 Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire{...}'
+
+=======================================================================================
+DESIGN DECISIONS:
+
+MakePK generates ./ fonts on each run, no matter if corresponding pk files already exist,
+because mf mode may be different on each run
+
+We need to use different files (both having 'ps' extension) for printing and for viewing
+because we do not want a file with one and the same name to contain content generated for different
+metafont modes.
+File for viewer is created in working directory, with the same name as source document.
+File created for printing is /tmp/PRINT.ps - we can use one file name for all documents
+because the file is used immediately after being written.
