@@ -12,3 +12,11 @@ metafont modes.
 File for viewer is created in working directory, with the same name as source document.
 File created for printing is /tmp/PRINT.ps - we can use one file name for all documents
 because the file is used immediately after being written.
+
+Default \pdfhorigin and \pdfvorigin for letter paper are 1in; to use default \hsize and \vsize for
+a4 paper they are changed as follows:
+  (210-6.5*25.4)/2=22.45mm
+  (297-9*25.4)/2=34.2mm
+
+Start mf file with %! line if you need to set geometry, for example:
+  %! pdfpagewidth=210mm pdfpageheight=297mm pdfhorigin=4.1mm pdfvorigin=20mm
