@@ -22,3 +22,8 @@ a4 paper they are changed as follows:
 
 Start mf file with %! line if you need to set geometry, for example:
   %! pdfpagewidth=210mm pdfpageheight=297mm pdfhorigin=4.1mm pdfvorigin=20mm
+
+\pdfpagewidth, \pdfpageheight, \pdfhorigin and \pdfvorigin are stored in comment of dvi file
+and are subsequently used as arguments to dvips.
+
+Use \pdfhorigin and \pdfvorigin to set margins (this is not the role of \hoffset and \voffset).
