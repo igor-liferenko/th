@@ -1,0 +1,3 @@
+#!/bin/sh
+uni=`perl -CA -e 'printf "%04X\n", ord($ARGV[0])' $1`
+grep ^$uni ~/th/gbsnu.txt | sed 's/^.... /\\font\\gbsnu=/;s/ / \\gbsnu \\char/'
