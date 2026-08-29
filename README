@@ -3,37 +3,43 @@ Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire
 =======================================================================================
 DESIGN DECISIONS:
 
-MakePK generates pk files for ./ fonts on each run, because mf mode may be different on each run
-(this automatically covers the case when pk file did not exist previously).
-Also, if you are editing a character, you want to see new version of it on each run,
-even though the same mode was used for generating previous pk file with this character.
+In formats based on тех.tex, \\ is a dedicated control sequence
+(in contrast to plain.tex).
 
-We need to use different files (both having 'ps' extension) for printing and for viewing
-because we do not want a file with one and the same name to contain content generated for different
-metafont modes.
-File for viewer is created in working directory, with the same name as source document.
-File created for printing is /tmp/PRINT.ps - we can use one file name for all documents
-because the file is used immediately after being written.
+For strut-based code (including tables) use uppercase font commands (e.g., TENRM).
+(In \headline also use uppercase font commands, because \makeheadline uses
+8.5pt, which is the height of a strut.)
 
-Default \pdfhorigin and \pdfvorigin for letter paper are 1in; to use default \hsize and \vsize for
-a4 paper they are changed as follows:
-  (210-6.5*25.4)/2=22.45mm
-  (297-9*25.4)/2=34.2mm
+After being built, TeX and MF must be configured by running 'make' in mytex/ (done
+automatically).
+
+PK fonts are generated using MakePK in mytex/dvips
+
+MakePK generates pk files for ./ fonts on each run, because mf mode in current
+run may be different from mf mode in previous run (tex- vs. tex+, dvi- vs. dvi+)
+and there is no way to tell which mf mode was used for a given pk-file. Also, if
+you are editing a character, you want to see new version of it on each run.
 
 Start mf file with %! line if you need to set geometry, for example:
   %! pdfpagewidth=210mm pdfpageheight=297mm pdfhorigin=4.1mm pdfvorigin=20mm
 
-\pdfpagewidth, \pdfpageheight, \pdfhorigin and \pdfvorigin are stored in comment of dvi file
-and are subsequently used as arguments to dvips.
+Use \pdfhorigin and \pdfvorigin to set margins, \pdfpagewidth and \pdfpageheight to
+set paper size.
+(\pdfpagewidth, \pdfpageheight, \pdfhorigin and \pdfvorigin are stored in
+comment of dvi file and are subsequently used as arguments to dvips.)
+Default \pdfhorigin and \pdfvorigin for letter paper are 1in; to use default \hsize
+and \vsize for a4 paper they are changed as follows:
+  (210-6.5*25.4)/2=22.45mm
+  (297-9*25.4)/2=34.2mm
 
-Use \pdfhorigin and \pdfvorigin to set margins (this is not the role of \hoffset and \voffset).
+PS is used instead of PDF because PS format allows to split document into pages,
+leaving the rest of the document intact. And page splitting is critical, because
+we can not generate only necessary pages in dvi-processing stage - we need to
+actually see all the pages to be able to choose which pages to print, which
+means that we must generate the whole document and open it in viewer - page
+splitting will be done at a later stage by viewer.
 
-PS is used instead of PDF because PS format allows to split document into pages, leaving the rest of the
-document intact. And page splitting is critical, because we can not generate only necessary pages in
-dvi-processing stage - we need to actually see all the pages to be able to choose which pages to print,
-which means that we must generate the whole document and open it in viewer - page splitting will be done
-at a later stage by viewer.
-
-For printing use only viewer which uses lpr program for printing (there are viewers that connect
-to cups socket directly). This allows to override lpr with ad-hoc program which sends the PS data
-directly to printer (after wrapping it in PJL commands).
+For printing use only viewer which uses lpr program for printing (there are
+viewers that connect to cups socket directly). This allows to override lpr with
+ad-hoc program which sends the PS data directly to printer (after wrapping it in
+PJL commands).
