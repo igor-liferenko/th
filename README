@@ -38,7 +38,7 @@ passed through to DVI file by gftodvi)
 Use \pdfhorigin and \pdfvorigin to set margins, \pdfpagewidth and \pdfpageheight to
 set paper size.
 (\pdfpagewidth, \pdfpageheight, \pdfhorigin and \pdfvorigin are stored in
-comment of dvi file and are subsequently used as arguments to dvips.)
+comment of DVI file)
 Default \pdfhorigin and \pdfvorigin for letter paper are 1in; to use default \hsize
 and \vsize for a4 paper they are changed as follows:
   (210-6.5*25.4)/2=22.45mm
