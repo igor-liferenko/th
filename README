@@ -3,7 +3,7 @@ Until document is completed, use '\qtwopages \shipout\vbox{}' instead of '\quire
 =======================================================================================
 DESIGN DECISIONS:
 
-Added UTF-8 support using web2w-0.4 from CTAN.
+Add UTF-8 support to TeX (see utf8.tex).
 
 Open log-file in graphical text editor and delete or add excess or missing
 newlines there. When editor detects that log-file changed on disk, it shows
