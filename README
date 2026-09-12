@@ -72,3 +72,13 @@ For printing use only viewer which uses lpr program for printing (there are
 viewers that connect to cups socket directly). This allows to override lpr with
 ad-hoc program which sends the PS data directly to printer (after wrapping it in
 PJL commands).
+
+==================================================================
+
+To use debugger in tex, add "-g -Og" and run "format=plain gdb virtex"
+Use this change-file to make stepping over this line with `n' command faster:
+@x
+for (i=first_text_char; i<=last_text_char; i++) xord[chr(i)]=invalid_code;
+@y
+memset(xord, invalid_code, sizeof xord);
+@z
