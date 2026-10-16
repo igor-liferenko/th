@@ -48,7 +48,7 @@ Start mf file with %! line if you need to set paper size and/or horizontal
 and vertical origins, for example:
   %! pdfpagewidth=210mm pdfpageheight=297mm pdfhorigin=4.1mm pdfvorigin=20mm
 These values are appended to comment of GF file (and passed through to comment
-of DVI file by gftodvi; they are stripped from hardcopy proof and from PK comment).
+of DVI file by gftodvi).
 In mytex/dvips they are extracted and passed to dvips via -T and -O options.
 
 Plain TeX was designed with Letter paper in mind (8.5in x 11in, with 1in space
