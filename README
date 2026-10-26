@@ -9,12 +9,12 @@ newlines there. When editor detects that log-file changed on disk, it shows
 One example of excess/missing newlines:
 https://tug.org/pipermail/tex-k/2023-March/003909.html
 https://tug.org/pipermail/tex-k/2023-March/003910.html
-https://tug.org/pipermail/tex-k/2023-September/003971.html
+https://tug.org/pipermail/tex-k/2023-September/003971.html (just to clarify the explanation given in previous link)
 
-On terminal, newline is added automatically after TeX (and MF) exits,
+In tex and mf, newline is put automatically to terminal after termination,
 but only if cursor is not in the beginning of line.
-In dvitype, gftodvi and gftopk the same effect is achieved by redirecting their output to a file,
-because these programs are non-interactive.
+In dvitype, gftodvi and gftopk the same effect is achieved by a different
+(simpler) mechanism, because they are non-interactive.
 
 \\ is a dedicated control sequence in formats 10pt, 12pt, 14pt and 17pt
 
