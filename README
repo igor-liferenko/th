@@ -11,9 +11,10 @@ https://tug.org/pipermail/tex-k/2023-March/003909.html
 https://tug.org/pipermail/tex-k/2023-March/003910.html
 https://tug.org/pipermail/tex-k/2023-September/003971.html
 
-On terminal newline is added automatically after each program
-(tex mf dvitype gftodvi gftopk) exits,
+On terminal, newline is added automatically after TeX (and MF) exits,
 but only if cursor is not in the beginning of line.
+In dvitype, gftodvi and gftopk the same effect is achieved by redirecting their output to a file,
+because these programs are non-interactive.
 
 \\ is a dedicated control sequence in formats 10pt, 12pt, 14pt and 17pt
 
